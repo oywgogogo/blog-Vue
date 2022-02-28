@@ -44,7 +44,7 @@
     },
     computed: {
       title (){
-        return '日志 - skq'
+        return '日志 - oyw'
       }
     }
   }
