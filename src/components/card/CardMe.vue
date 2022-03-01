@@ -1,6 +1,6 @@
 <template>
-  <el-card>
-    <h1 class="me-author-name">littleo</h1>
+  <el-card class="el-card1">
+    <h1 class="me-author-name">天青色</h1>
     <div class="me-author-description">
       <span><i class="el-icon-location-outline"></i> &nbsp;江西&赣州</span>
       <span><i class="me-icon-job"></i> &nbsp;java </span>
@@ -62,5 +62,9 @@
     cursor: pointer;
     padding: 4px 10px;
     font-size: 30px;
+  }
+
+  .el-card1 {
+    /*margin-top: 200px;*/
   }
 </style>

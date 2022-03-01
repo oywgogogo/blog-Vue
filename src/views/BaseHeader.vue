@@ -1,61 +1,78 @@
 <template>
-  <el-header class="me-area">
-    <el-row class="me-header">
 
-      <el-col :span="4" class="me-header-left">
-        <router-link to="/" class="me-title">
-          <img src="../assets/img/logo.png" />
+  <el-header  class="el-header">
+    <div class="blog-navbar" >
+
+      <router-link style="text-decoration-line: none;color: white" to="/">
+        <h3 style="display: inline;padding:20px 20px 20px 60px">天青色的Blog
+        </h3>
+      </router-link>
+
+      <router-link  style="text-decoration-line: none;color: white;padding:20px;"
+                   to="/">
+        首页
+      </router-link>
+
+
+
+      <router-link  style="text-decoration-line: none;color: white;padding:20px"
+                   to="/category/all">
+        文章分类
+      </router-link>
+      <router-link  style="text-decoration-line: none;color: white;padding:20px"
+                   to="/tag/all">
+        标签
+      </router-link>
+
+
+      <router-link  style="text-decoration-line: none;color: white;padding:20px"
+                   to="/archives">
+        文章归档
+      </router-link>
+
+      <router-link  style="text-decoration-line: none;color: white;padding:20px"
+                    to="/write">
+        写文章
+      </router-link>
+
+
+      <template v-if="!user.login">
+
+        <router-link  class="login_router"
+                     to="/login">
+          登录
         </router-link>
-      </el-col>
 
-      <el-col v-if="!simple" :span="16">
-        <el-menu :router=true menu-trigger="click" active-text-color="#5FB878" :default-active="activeIndex"
-                 mode="horizontal">
-          <el-menu-item index="/">首页</el-menu-item>
-          <el-menu-item index="/category/all">文章分类</el-menu-item>
-          <el-menu-item index="/tag/all">标签</el-menu-item>
-          <el-menu-item index="/archives">文章归档</el-menu-item>
-
-          <el-col :span="4" :offset="4">
-            <el-menu-item index="/write"><i class="el-icon-edit"></i>写文章</el-menu-item>
-          </el-col>
-
-        </el-menu>
-      </el-col>
-
-      <template v-else>
-        <slot></slot>
+          <el-button type="text" v-show= false>注册</el-button>
       </template>
 
-      <el-col :span="4">
-        <el-menu :router=true menu-trigger="click" mode="horizontal" active-text-color="#5FB878">
+      <template v-else >
+        <el-dropdown class="el-dropdown">
+          <img class="me-header-picture" :src="user.avatar"/>
+          <el-dropdown-menu>
+            <el-dropdown-item @click.native="logout">
+                退出
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
-          <template v-if="!user.login">
-            <el-menu-item index="/login">
-              <el-button type="text">登录</el-button>
-            </el-menu-item>
-            <el-menu-item index="/register">
-              <el-button type="text">注册</el-button>
-            </el-menu-item>
-          </template>
 
-          <template v-else>
-            <el-submenu index>
-              <template slot="title">
-                <img class="me-header-picture" :src="user.avatar"/>
-              </template>
-              <el-menu-item index @click="logout"><i class="el-icon-back"></i>退出</el-menu-item>
-            </el-submenu>
-          </template>
-        </el-menu>
-      </el-col>
+      </template>
 
-    </el-row>
+
+
+
+
+
+
+    </div>
   </el-header>
 </template>
 
 <script>
+
   export default {
+
     name: 'BaseHeader',
     props: {
       activeIndex: String,
@@ -65,7 +82,16 @@
       }
     },
     data() {
-      return {}
+      return {
+        types: {},
+        input: '',
+        queryString: '',
+        queryResult: [],
+        timer: null,
+        mobileHide: false,
+        ifShowInput: false,
+
+      }
     },
     computed: {
       user() {
@@ -95,31 +121,53 @@
 
   .el-header {
     position: fixed;
-    z-index: 1024;
-    min-width: 100%;
-    box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
+    /*z-index: 1024;*/
+    min-width: 97.5%;
   }
+  /*skymo's blog*/
 
-  .me-title {
-    margin-top: 10px;
-    font-size: 24px;
-  }
+  .blog-navbar {
 
-  .me-header-left {
-    margin-top: 10px;
-  }
+    border-radius: 15px;
+    height: 100px!important;
+    line-height: 100px;
+    font-size: 20px;
+    /*padding-top:  20px;*/
+    background-color: #333333;
 
-  .me-title img {
-    max-height: 2.4rem;
-    max-width: 100%;
+
+
+    /*margin-left: auto !important;*/
+    /*margin-right: auto !important;*/
+
+
   }
+ .login_router {
+   text-decoration-line: none;
+   color: white;
+   padding:20px;
+   float:right;
+   margin-right: 40px;
+   line-height: 20px;
+   font-size: 20px;
+   color: #8affeb;
+   margin-top: 20px;
+   border: 1px solid #8affeb;
+}
 
   .me-header-picture {
-    width: 36px;
-    height: 36px;
+    float:right;
+    margin-right: 40px;
+    width: 46px;
+    height: 46px;
     border: 1px solid #ddd;
     border-radius: 50%;
     vertical-align: middle;
-    background-color: #5fb878;
+    margin-top: 20px;
+  }
+  .el-dropdown{
+    margin-top: 10px;
+    float:right;
+    margin-right: 40px;
   }
 </style>

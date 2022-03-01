@@ -1,17 +1,17 @@
 <template>
   <div id="home">
     <el-container>
-    	
+
     	<base-header :activeIndex="activeIndex"></base-header>
-		  
+
 		  <router-view class="me-container"/>
-		  
+
 			<base-footer v-show="footerShow"></base-footer>
-		  
+
 		</el-container>
-		
+
   </div>
-  
+
 </template>
 
 <script>
@@ -49,7 +49,30 @@ export default {
 
 <style>
 
+#home{
+  padding: 20px;
+  font-family: "montserrat";
+  background-image: linear-gradient(125deg,#d580ff, #ffaa00);
+  background-size: 400%;
+  animation: bganimation 10s infinite;
+
+}
+@keyframes bganimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 .me-container{
-  margin: 100px auto 140px;
+  margin: 120px auto 140px;
 }
 </style>

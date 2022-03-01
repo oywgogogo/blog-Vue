@@ -9,8 +9,14 @@
 import GoTop from '@/components/gotop/GoTop'
 export default {
   name: 'App',
-  components: { GoTop }
-}
+  components: { GoTop },
+  data() {
+    return{
+
+    }
+  }
+
+ }
 </script>
 
 <style>
@@ -31,7 +37,10 @@ a:hover {
 	color: #5FB878;
 }
 .me-area{
+  border: 1px solid black;
+  /*margin-top: 120px!important;*/
 	background-color: #fff;
+  border-radius: 10px!important;
 }
 html{height:100%;}
 body{min-height:100%;}

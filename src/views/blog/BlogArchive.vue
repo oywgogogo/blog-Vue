@@ -59,7 +59,7 @@
     },
     computed: {
       title (){
-        return this.currentArchive + ' - 文章归档 - skq'
+        return this.currentArchive + ' - 文章归档 - 天青色'
       },
       currentArchive (){
         if(this.article.query.year && this.article.query.month){

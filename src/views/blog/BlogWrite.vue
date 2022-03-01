@@ -2,7 +2,7 @@
   <div id="write" v-title :data-title="title">
     <el-container>
       <base-header :simple=true>
-        <el-col :span="4" :offset="2">
+        <!--<el-col :span="4" :offset="2">
           <div class="me-write-info">写文章</div>
         </el-col>
         <el-col :span="4" :offset="6">
@@ -11,7 +11,7 @@
             <el-button round v-if=isUpdate @click="publishShow">修改</el-button>
             <el-button round @click="cancel">取消</el-button>
           </div>
-        </el-col>
+        </el-col>-->
       </base-header>
 
       <el-container class="me-area me-write-box">
@@ -29,7 +29,21 @@
           <div id="placeholder" style="visibility: hidden;height: 89px;display: none;"></div>
           <markdown-editor :editor="articleForm.editor" class="me-write-editor"></markdown-editor>
         </el-main>
+
+
       </el-container>
+
+      <el-aside class="modfiy_category">
+        <div class="me-write-btn">
+<!--          <el-button round v-if=!isUpdate @click="publishShow">发布</el-button>-->
+          <el-button circle type="success" icon="el-icon-edit"  v-if=isUpdate @click="publishShow">修改</el-button>
+          <el-button circle type="success" icon="el-icon-check" v-if=!isUpdate @click="publishShow">发布</el-button>
+        </div>
+        <div class="me-write-btn">
+          <el-button circle type="danger" icon="el-icon-remove" @click="cancel">取消</el-button>
+        </div>
+      </el-aside>
+
 
       <el-dialog title="摘要 分类 标签"
                  :visible.sync="publishVisible"
@@ -152,7 +166,7 @@
     },
     computed: {
       title (){
-        return '写文章 - littleo'
+        return '写文章 - 天青色'
 		}
 	},
     methods: {
@@ -376,12 +390,29 @@
 </script>
 
 <style>
-  .el-header {
-    position: fixed;
-    z-index: 1024;
-    min-width: 100%;
-    box-shadow: 0 2px 3px hsla(0, 0%, 7%, .1), 0 0 0 1px hsla(0, 0%, 7%, .1);
+
+/*渐变色背景*/
+#write{
+  padding: 20px;
+  font-family: "montserrat";
+  background-image: linear-gradient(125deg,#d580ff, #ffaa00);
+  background-size: 400%;
+  animation: bganimation 10s infinite;
+
+}
+@keyframes bganimation {
+  0% {
+    background-position: 0% 50%;
   }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
   .me-write-info {
     line-height: 60px;
@@ -394,8 +425,10 @@
   }
 
   .me-write-box {
-    max-width: 700px;
-    margin: 80px auto 0;
+    margin-top: 120px;
+    max-width: 1000px;
+    margin-left: 100px;
+    border-radius: 15px;
   }
 
   .me-write-main {
@@ -437,5 +470,13 @@
 
   .auto-textarea-input, .auto-textarea-block {
     font-size: 18px !important;
+  }
+
+/*  发布修改*/
+  .modfiy_category{
+    margin-top: 120px;
+    width: 200px!important;
+    height: 100px;
+    margin-left: 50px;
   }
 </style>

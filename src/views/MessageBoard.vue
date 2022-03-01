@@ -24,7 +24,7 @@
     },
     computed: {
       title (){
-        return '留言板 - skq'
+        return '留言板 - 天青色'
       }
     }
   }
