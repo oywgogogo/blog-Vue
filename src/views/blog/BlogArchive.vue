@@ -65,7 +65,7 @@
         if(this.article.query.year && this.article.query.month){
           return `${this.article.query.year}年${this.article.query.month}月`
         }
-        return '全部'
+        return ''
       }
     },
     methods: {

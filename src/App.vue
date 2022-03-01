@@ -37,7 +37,7 @@ a:hover {
 	color: #5FB878;
 }
 .me-area{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   /*margin-top: 120px!important;*/
 	background-color: #fff;
   border-radius: 10px!important;

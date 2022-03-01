@@ -1,6 +1,10 @@
 <template>
-  <div v-title data-title="天青色博客">
+  <div v-title data-title="天青色的Blog" style="width: 90%">
     <el-container>
+
+      <el-aside class="el-aside-left">
+        <card-me class="me-area"></card-me>
+      </el-aside>
 
       <el-main class="me-articles">
 
@@ -8,9 +12,9 @@
 
       </el-main>
 
-      <el-aside>
+      <el-aside class="el-aside-right">
 
-        <card-me class="me-area"></card-me>
+<!--        <card-me class="me-area"></card-me>-->
         <card-tag :tags="hotTags"></card-tag>
 
         <card-article cardHeader="最热文章" :articles="hotArticles"></card-article>
@@ -112,10 +116,19 @@
 <style scoped>
 
   .el-container {
-    width: 960px;
+    /*width: 960px;*/
+    width: 100% !important;
+    border: 1px solid black;
+
+
   }
 
-  .el-aside {
+  .el-aside-left {
+    /*margin-right: 20px;*/
+    width: 260px!important;
+    margin-right: 20px;
+  }
+  .el-aside-right {
     margin-left: 20px;
     width: 260px;
   }
