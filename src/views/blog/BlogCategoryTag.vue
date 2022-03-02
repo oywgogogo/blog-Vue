@@ -2,7 +2,7 @@
   <div class="me-ct-body" v-title :data-title="title">
     <el-container class="me-ct-container">
       <el-main>
-        <div class="me-ct-title me-area">
+        <div class="me-ct-title">
           <template v-if="this.$route.params.type === 'tag'">
             <img class="me-ct-picture" :src="ct.avatar?ct.avatar:defaultAvatar"/>
             <h3 class="me-ct-name">{{ct.tagName}}</h3>
@@ -14,7 +14,7 @@
             <p>{{ct.description}}</p>
           </template>
 
-          <span class="me-ct-meta">{{ct.articles}} 文章</span>
+          <span class="me-ct-meta">{{ct.articles}}</span>
         </div>
 
         <div class="me-ct-articles">
@@ -136,6 +136,7 @@
     text-align: center;
     height: 150px;
     padding: 20px;
+    margin-top: 50px;
   }
 
   .me-ct-picture {
@@ -148,7 +149,7 @@
   }
 
   .me-ct-meta {
-    font-size: 12px;
+    font-size: 20px;
     color: #969696;
   }
 
