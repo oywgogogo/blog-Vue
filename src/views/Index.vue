@@ -12,16 +12,16 @@
 
       </el-main>
 
-      <el-aside class="el-aside-right">
+      <el-aside class="el-aside-right" >
 
 <!--        <card-me class="me-area"></card-me>-->
-        <card-tag :tags="hotTags"></card-tag>
+        <card-tag :tags="hotTags" style="border-radius: 10px"></card-tag>
 
-        <card-article cardHeader="最热文章" :articles="hotArticles"></card-article>
+        <card-article cardHeader="最热文章" :articles="hotArticles" style="border-radius: 10px"></card-article>
 
-        <card-archive cardHeader="文章归档" :archives="archives"></card-archive>
+        <card-archive cardHeader="文章归档" :archives="archives" style="border-radius: 10px"></card-archive>
 
-        <card-article cardHeader="最新文章" :articles="newArticles"></card-article>
+        <card-article cardHeader="最新文章" :articles="newArticles" style="border-radius: 10px"></card-article>
 
       </el-aside>
 
@@ -118,7 +118,7 @@
   .el-container {
     /*width: 960px;*/
     width: 100% !important;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 
 
   }

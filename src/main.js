@@ -11,6 +11,7 @@ import ElementUI from 'element-ui'
 import '@/assets/theme/index.css'
 
 import '@/assets/icon/iconfont.css'
+import '@/assets/icon1/iconfont.css'
 
 import {formatTime} from "./utils/time";
 
