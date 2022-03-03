@@ -90,7 +90,7 @@
         timer: null,
         mobileHide: false,
         ifShowInput: false,
-        opacityStyle:{ opacity:10 },
+        opacityStyle:{ opacity:1 },
         i: 0
       }
     },
@@ -135,10 +135,10 @@
         console.log(scroll)
         if (scroll < 0) {
           // 鼠标上滚  执行的的方法
-          this.opacityStyle.opacity -= scroll/50
+          this.opacityStyle.opacity -= scroll/500
         } else {
           // 鼠标下滚  执行的的方法
-          this.opacityStyle.opacity -= scroll/50
+          this.opacityStyle.opacity -= scroll/500
         }
       }
 
