@@ -1,8 +1,10 @@
 <template>
   <div v-title data-title="天青色的Blog" style="width: 90%">
-    <el-container>
 
+    <el-container>
       <el-aside class="el-aside-left">
+
+
         <card-me class="me-area"></card-me>
       </el-aside>
 

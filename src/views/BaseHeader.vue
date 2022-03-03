@@ -1,7 +1,7 @@
 <template>
 
   <el-header  class="el-header">
-    <div class="blog-navbar" >
+    <div class="blog-navbar" :style="opacityStyle" >
 
       <router-link style="text-decoration-line: none;color: white" to="/">
         <h3 style="display: inline;padding:20px 20px 20px 60px">天青色的Blog
@@ -90,8 +90,12 @@
         timer: null,
         mobileHide: false,
         ifShowInput: false,
-
+        opacityStyle:{ opacity:10 },
+        i: 0
       }
+    },
+    mounted() {
+      window.addEventListener('scroll',this.handleScroll,true)
     },
     computed: {
       user() {
@@ -102,6 +106,7 @@
         }
       }
     },
+
     methods: {
       logout() {
         let that = this
@@ -112,7 +117,32 @@
             that.$message({message: error, type: 'error', showClose: true});
           }
         })
+      },
+      handleScroll() {
+        /*let top = document.documentElement.scrollTop //获取scroll偏移值
+        let height_window = window.screen.height
+        if(top > 45 && top <= height_window){   //实际按需求取范围
+          let opacity = top / height_window    //对opacity作计算，透明度从起始到1随偏移值而改变
+          this.opacityStyle.opacity -= opacity  //实时返回给opacityStyle
+        }*/
+
+        // 监听鼠标滚动
+        // 页面滚动距顶部距离
+        let height_window = window.screen.height
+        var scrollTop = document.documentElement.scrollTop
+        var scroll = scrollTop - this.i;
+        this.i = scrollTop;
+        console.log(scroll)
+        if (scroll < 0) {
+          // 鼠标上滚  执行的的方法
+          this.opacityStyle.opacity -= scroll/50
+        } else {
+          // 鼠标下滚  执行的的方法
+          this.opacityStyle.opacity -= scroll/50
+        }
       }
+
+
     }
   }
 </script>
