@@ -8,30 +8,32 @@
           <!--</li>-->
         <!--</ul>-->
       <!--</el-aside>-->
+      <el-aside></el-aside>
       <el-main>
 
         <div class="me-view-card">
-          <h1 class="me-view-title">{{article.title}}</h1>
-          <div class="me-view-author">
+
+          <div class="me-view-author" >
+            <h1 class="me-view-title">{{article.title}}</h1>
             <a class="">
               <img class="me-view-picture" :src="article.avatar"></img>
             </a>
             <div class="me-view-info">
               <span>{{article.author}}</span>
               <div class="me-view-meta">
-                <span>{{article.createDate | format}}</span>
-                <span>阅读   {{article.viewCounts}}</span>
-                <span>评论   {{article.commentCounts}}</span>
+                <span>{{article.createDate | format}}</span>&nbsp;&nbsp;&nbsp;
+                <span><i class="iconfont icon-yuedu"></i>   {{article.viewCounts}}</span>&nbsp;&nbsp;
+                <span><i class="iconfont icon-pinglun"/>   {{article.commentCounts}}</span>
               </div>
 
             </div>
             <el-button
+              size="mini"
               v-if= isAuthor
               @click="editArticle()"
-              style="position: absolute;left: 60%;"
-              size="mini"
+              style="position: absolute;left: 70%; top: 200px"
               round
-              icon="el-icon-edit">编辑</el-button>
+              icon="el-icon-edit" type="success">编辑</el-button>
           </div>
           <div class="me-view-content">
             <markdown-editor :editor=article.editor></markdown-editor>
@@ -46,16 +48,18 @@
             </el-alert>
           </div>
 
-          <div class="me-view-tag">
-            标签：
-            <!--<el-tag v-for="t in article.tags" :key="t.id" class="me-view-tag-item" size="mini" type="success">{{t.tagName}}</el-tag>-->
-            <el-button @click="tagOrCategory('tag', t.id)" size="mini" type="primary" v-for="t in article.tags" :key="t.id" round plain>{{t.tagName}}</el-button>
-          </div>
+          <div class="info">
+            <div class="me-view-tag">
+              标签：
+              <!--<el-tag v-for="t in article.tags" :key="t.id" class="me-view-tag-item" size="mini" type="success">{{t.tagName}}</el-tag>-->
+              <el-button @click="tagOrCategory('tag', t.id)" size="mini" type="primary" v-for="t in article.tags" :key="t.id" round plain>{{t.tagName}}</el-button>
+            </div>
 
-          <div class="me-view-tag">
-            文章分类：
-            <!--<span style="font-weight: 600">{{article.category.categoryName}}</span>-->
-            <el-button @click="tagOrCategory('category', article.category.id)" size="mini" type="primary" round plain>{{article.category.categoryName}}</el-button>
+            <div class="me-view-category">
+              文章分类：
+              <!--<span style="font-weight: 600">{{article.category.categoryName}}</span>-->
+              <el-button @click="tagOrCategory('category', article.category.id)" size="mini" type="primary" round plain>{{article.category.categoryName}}</el-button>
+            </div>
           </div>
 
           <div class="me-view-comment">
@@ -222,6 +226,7 @@
         publishComment(parms,this.$store.state.token).then(data => {
           if(data.success){
             that.$message({type: 'success', message: '评论成功', showClose: true})
+            // this.reload()
             that.comment.content = ''
             that.comments.unshift(data.data)
             that.commentCountsIncrement()
@@ -235,6 +240,8 @@
             that.$message({type: 'error', message: '评论失败', showClose: true})
           }
         })
+        this.$router.go(0)
+
       },
 
       getCommentsByArticle() {
@@ -286,6 +293,7 @@
   }
 
   .me-view-title {
+    text-align: center;
     font-size: 34px;
     font-weight: 800;
     line-height: 1.3;
@@ -293,8 +301,12 @@
 
   .me-view-author {
     /*margin: 30px 0;*/
-    margin-top: 30px;
+    margin-top: 10px;
     vertical-align: middle;
+    border:1px solid #e3e197;
+    background:#fff;
+    /*border-radius: 5px;*/
+
   }
 
   .me-view-picture {
@@ -313,18 +325,31 @@
   }
 
   .me-view-meta {
-    font-size: 12px;
-    color: #969696;
+    font-size: 14px;
+    color: #343030;
   }
 
   .me-view-end {
     margin-top: 20px;
   }
 
+  .info {
+    border-left: 4px solid #c5cac3;
+    background:#ffffdd;
+    border-radius: 5px;
+  }
+
   .me-view-tag {
+    padding-top: 5px;
     margin-top: 20px;
     padding-left: 6px;
-    border-left: 4px solid #c5cac3;
+
+
+  }
+
+  .me-view-category {
+    padding-top: 5px;
+    padding-left: 6px;
   }
 
   .me-view-tag-item {
@@ -359,6 +384,11 @@
 
   .v-note-wrapper .v-note-panel .v-note-show .v-show-content, .v-note-wrapper .v-note-panel .v-note-show .v-show-content-html {
     background: #fff !important;
+  }
+
+  .me-view-content {
+    /*margin-top: 20px;*/
+
   }
 
 

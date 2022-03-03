@@ -132,7 +132,6 @@
         var scrollTop = document.documentElement.scrollTop
         var scroll = scrollTop - this.i;
         this.i = scrollTop;
-        console.log(scroll)
         if (scroll < 0) {
           // 鼠标上滚  执行的的方法
           this.opacityStyle.opacity -= scroll/500

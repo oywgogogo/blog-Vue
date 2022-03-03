@@ -56,6 +56,7 @@
 
   .me-editor {
     z-index: 6 !important;
+
   }
 
   .v-note-wrapper.fullscreen {

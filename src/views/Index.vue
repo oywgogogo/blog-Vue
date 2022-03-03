@@ -75,6 +75,7 @@
         let that = this
         getNewArtices().then(data => {
           that.newArticles = data.data
+          console.log(that.newArticles)
         }).catch(error => {
           if (error !== 'error') {
             that.$message({type: 'error', message: '最新文章加载失败!', showClose: true})
