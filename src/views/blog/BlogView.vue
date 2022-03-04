@@ -1,5 +1,6 @@
 <template>
   <div class="me-view-body" v-title :data-title="title">
+
     <el-container class="me-view-container">
       <!--<el-aside class="me-area">-->
         <!--<ul class="me-operation-list">-->
@@ -8,7 +9,9 @@
           <!--</li>-->
         <!--</ul>-->
       <!--</el-aside>-->
-      <el-aside></el-aside>
+      <el-aside class="cardme">
+        <card-me></card-me>
+      </el-aside>
       <el-main>
 
         <div class="me-view-card">
@@ -31,7 +34,7 @@
               size="mini"
               v-if= isAuthor
               @click="editArticle()"
-              style="position: absolute;left: 70%; top: 200px"
+              style="position: absolute;left: 65%; top: 200px"
               round
               icon="el-icon-edit" type="success">编辑</el-button>
           </div>
@@ -82,9 +85,9 @@
                 </el-col>
               </el-row>
 
-              <el-row :gutter="20">
-                <el-col :span="2" :offset="22">
-                  <el-button type="text" @click="publishComment()">评论</el-button>
+              <el-row :gutter="18" >
+                <el-col :span="1" :offset="21">
+                  <el-button type="success" @click="publishComment()">评论</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -107,12 +110,25 @@
 
         </div>
       </el-main>
+      <el-aside class="el-aside-right view_right" >
 
+        <!--        <card-me class="me-area"></card-me>-->
+        <card-tag :tags="hotTags" style="border-radius: 10px"></card-tag>
+
+        <card-article cardHeader="最热文章" :articles="hotArticles" style="border-radius: 10px; margin-top: 20px" ></card-article>
+
+        <card-archive cardHeader="文章归档" :archives="archives" style="border-radius: 10px; margin-top: 20px"></card-archive>
+
+        <card-article cardHeader="最新文章" :articles="newArticles" style="border-radius: 10px; margin-top: 20px"></card-article>
+
+      </el-aside>
     </el-container>
   </div>
 </template>
 
 <script>
+
+  import CardMe from '@/components/card/CardMe'
   import MarkdownEditor from '@/components/markdown/MarkdownEditor'
   import CommmentItem from '@/components/comment/CommentItem'
   import {viewArticle} from '@/api/article'
@@ -120,17 +136,35 @@
 
   import default_avatar from '@/assets/img/default_avatar.png'
 
+  import CardArticle from '@/components/card/CardArticle'
+  import CardArchive from '@/components/card/CardArchive'
+  import CardTag from '@/components/card/CardTag'
+  import ArticleScrollPage from '@/views/common/ArticleScrollPage'
+
+  import {getArticles, getHotArtices, getNewArtices} from '@/api/article'
+  import {getHotTags} from '@/api/tag'
+  import {listArchives} from '@/api/article'
+
   export default {
     name: 'BlogView',
     created() {
       this.getArticle()
+      this.getHotArtices()
+      this.getNewArtices()
+      this.getHotTags()
+      this.listArchives()
 
     },
     watch: {
       '$route': 'getArticle'
     },
+
     data() {
       return {
+        hotTags: [],
+        hotArticles: [],
+        newArticles: [],
+        archives: [],
         article: {
           id: '',
           title: '',
@@ -159,6 +193,7 @@
         }
       }
     },
+
     computed: {
       avatar() {
         let avatar = this.$store.state.avatar
@@ -173,6 +208,53 @@
       }
     },
     methods: {
+      getHotArtices() {
+        let that = this
+        getHotArtices().then(data => {
+          that.hotArticles = data.data
+        }).catch(error => {
+          if (error !== 'error') {
+            that.$message({type: 'error', message: '最热文章加载失败!', showClose: true})
+          }
+
+        })
+
+      },
+      getNewArtices() {
+        let that = this
+        getNewArtices().then(data => {
+          that.newArticles = data.data
+          console.log(that.newArticles)
+        }).catch(error => {
+          if (error !== 'error') {
+            that.$message({type: 'error', message: '最新文章加载失败!', showClose: true})
+          }
+
+        })
+
+      },
+      getHotTags() {
+        let that = this
+        getHotTags().then(data => {
+          that.hotTags = data.data
+        }).catch(error => {
+          if (error !== 'error') {
+            that.$message({type: 'error', message: '最热标签加载失败!', showClose: true})
+          }
+
+        })
+      },
+      listArchives() {
+        listArchives().then((data => {
+          this.archives = data.data
+        })).catch(error => {
+          if (error !== 'error') {
+            this.$message({type: 'error', message: '文章归档加载失败!', showClose: true})
+          }
+        })
+      },
+
+      //---------------------------------------------------
       tagOrCategory(type, id) {
         this.$router.push({path: `/${type}/${id}`})
       },
@@ -264,7 +346,12 @@
     },
     components: {
       'markdown-editor': MarkdownEditor,
-      CommmentItem
+      CommmentItem,
+      'card-me': CardMe,
+      'card-article': CardArticle,
+      'card-tag': CardTag,
+      ArticleScrollPage,
+      CardArchive
     },
     //组件内的守卫 调整body的背景色
     beforeRouteEnter(to, from, next) {
@@ -281,15 +368,34 @@
 <style>
   .me-view-body {
     margin: 100px auto 140px;
+    width: 100%;
   }
 
   .me-view-container {
-    width: 800px;
+    width: 100%;
+    /*width: 100%;*/
+  }
+
+  .cardme {
+    margin-top: 20px;
+    margin-left: 60px;
+    width: 260px!important;
+    /*border-radius: 10px;*/
   }
 
   .el-main {
     /*margin-top: 20px;*/
     overflow: hidden;
+  }
+
+  .view_right {
+    margin-top: 20px;
+    margin-right: 70px;
+  }
+
+
+  .me-view-card {
+    width: 700px;
   }
 
   .me-view-title {
@@ -301,7 +407,7 @@
 
   .me-view-author {
     /*margin: 30px 0;*/
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     vertical-align: middle;
     border:1px solid #e3e197;
     background:#fff;
