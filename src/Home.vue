@@ -9,7 +9,9 @@
 			<base-footer v-show="footerShow"></base-footer>
 
 		</el-container>
-
+    <div>
+      <meting-js server="netease" type="playlist" id="7139531597" fixed="true" mini="true" ></meting-js>
+    </div>
   </div>
 
 </template>

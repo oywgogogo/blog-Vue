@@ -25,10 +25,7 @@
 
         <card-article cardHeader="最新文章" :articles="newArticles" style="border-radius: 10px"></card-article>
 
-        <div>
-          11111111111111
-          <meting-js server="netease" type="playlist" id="6859965088" fixed="true" mini="true" ></meting-js>
-        </div>
+
 
       </el-aside>
 
