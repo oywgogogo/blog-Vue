@@ -1,5 +1,5 @@
 <template>
-  <div id="login" v-title data-title="登录 - 码神之路">
+  <div id="login" v-title data-title="登录" class="login">
     <!--<video preload="auto" class="me-video-player" autoplay="autoplay" loop="loop">
           <source src="../../static/vedio/sea.mp4" type="video/mp4">
       </video>-->
@@ -70,9 +70,29 @@
 </script>
 
 <style scoped>
-  #login {
-    min-width: 100%;
-    min-height: 100%;
+  .login {
+/*    min-width: 100%;
+    min-height: 100%;*/
+    height: 780px;
+    padding: 20px;
+    font-family: "montserrat";
+    background-image: linear-gradient(125deg,#d580ff, #ffaa00);
+    background-size: 400%;
+    animation: bganimation 10s infinite;
+    border: 1px solid black;
+  }
+  @keyframes bganimation {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .me-video-player {
