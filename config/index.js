@@ -13,11 +13,11 @@ module.exports = {
     // 代理配置表，在这里可以配置特定的请求代理到对应的API接口
     // 例如将'localhost:8080/'代理到 http://localhost:8888
     proxyTable: {
-    	'/': {
+    	'/api': {
         target: 'http://89.47.166.199:8888/',
         changeOrigin: true,
         pathRewrite: {
-          '^/': ''
+          '^/api': ''
         }
       }
     },
