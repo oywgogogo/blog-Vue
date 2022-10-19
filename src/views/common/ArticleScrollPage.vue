@@ -76,6 +76,7 @@
         let that = this
         that.loading = true
 
+
         getArticles(that.query, that.innerPage).then(data => {
 
           let newArticles = data.data
